@@ -21,8 +21,8 @@
 const sec_list = document.querySelectorAll('section');
 // Navbar list
 const navbar = document.getElementById('navbar__list');
-// New List item
-// let li_item = document.createElement('li');
+// Top Button
+const topBtn = document.getElementById('topBtn');
 
 
 /**
@@ -107,6 +107,28 @@ function scrollSection() {
 
 }
 
+// Scroll to Top Button
+function scrollTop() {
+	// Show button when user scrolls below the fold of the page
+	if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+		topBtn.style.display = 'block';
+		topBtn.addEventListener('click', function () {
+			// Safari Compatability
+			document.body.scrollTo({
+				top: 0,
+				behavior: 'smooth'
+			});
+			// Chrome, Firefox, IE and Opera Compatability
+			document.documentElement.scrollTo({
+				top: 0,
+				behavior: 'smooth'
+			});
+		});
+	} else {
+		topBtn.style.display = 'none';
+	}
+}
+
 
 /**
  * End Main Functions
@@ -118,10 +140,9 @@ document.body.onload = function () {
 	// Build menu 
 	buildNav();
 
-	// Set sections as active when window scrolls
 	// window.onscroll = function (event) {
 	window.addEventListener('scroll', function (event) {
-		// console.log(inViewport(sec_list[1]));
+		// Set sections as active when window scrolls
 		sec_list.forEach((sec) => {
 			// console.log(sec);
 			// console.log(inViewport(sec));
@@ -132,6 +153,8 @@ document.body.onload = function () {
 				setActive(sec_anchor, 'active__link');
 			}
 		});
+		// Scroll to Top button when window scrolls
+		scrollTop();
 	});
 
 	// Scroll to section on link click
