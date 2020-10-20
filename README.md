@@ -21,5 +21,5 @@ The following functionalities were added to convert this project from a static p
 - Dynamically create a **Navigation Menu** based on the sections of the page.
 - **Section Active State:** While navigating through the page, the section that is active in the viewport/closest to the top is distinguished from the other sections.
 - **Scroll to Anchor:** When clicking an item from the navigation menu, the link scrolls to the appropriate section.
-- An an active state is added to the navigation items when a section is in the viewport.
+- An active state is added to the navigation items when a section is in the viewport.
 - Added a **Scroll to Top** button on the page that’s only visible when the user scrolls below the fold of the page.
