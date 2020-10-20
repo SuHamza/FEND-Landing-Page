@@ -73,17 +73,39 @@ function buildNav() {
 }
 
 // Add class 'active' to section when near top of viewport
-function setActive(elem) {
-	console.log(elem);
+function setActive(elem, className) {
+	// console.log(elem);
 	// Get previously 'active' section
-	const prevAvtice = document.querySelector('.active');
-	prevAvtice.classList.remove('active');
+	const prevAvtice = document.querySelector('.' + className + '');
+	if (prevAvtice) {
+		prevAvtice.classList.remove(className);
+	}
 	// Set 'active' class to new section
-	elem.classList.add('active');
+	elem.classList.add(className);
 }
 
 
 // Scroll to anchor ID using scrollTO event
+function scrollSection() {
+	const nav_link = document.querySelectorAll('.menu__link');
+	nav_link.forEach(link => {
+		link.addEventListener('click', function (e) {
+			e.preventDefault();
+			// Section ID
+			const sec_id = this.getAttribute('href');
+			// Requested Section
+			const req_sec = document.querySelector(sec_id);
+			// Add an active state to navigation items 
+			// for selected section
+			setActive(this, 'active__link');
+			// Scroll to requested section
+			req_sec.scrollIntoView({ behavior: "smooth" });
+
+		});
+
+	});
+
+}
 
 
 /**
@@ -104,14 +126,21 @@ document.body.onload = function () {
 			// console.log(sec);
 			// console.log(inViewport(sec));
 			if (inViewport(sec)) {
-				setActive(sec);
+				setActive(sec, 'active__section');
+				// Get Section Anchor in Navigation bar
+				const sec_anchor = document.querySelector('a[href=\'#' + sec.id + '\']');
+				setActive(sec_anchor, 'active__link');
 			}
 		});
 	});
+
+	// Scroll to section on link click
+	scrollSection();
+
+
 };
 
 
-// Scroll to section on link click
 
 
 
