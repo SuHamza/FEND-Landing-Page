@@ -60,27 +60,33 @@ function buildNav() {
 	 * to loop over each section in the document
 	 * because Not all browsers support the .forEach() method
 	 */
-	for (let i = 0; i < sec_list.length; i++) {
-		// console.log(sec_list[i].id)
-		// console.log(sec_list[i].dataset.nav);
-		//let li_txt = document.createTextNode(sec_list[i].dataset.nav);
-		//li_item.appendChild(li_txt);
-		//li_item.textContent = sec_list[i].dataset.nav;
-		let new_li = '<li><a class=\'menu__link\' href=\'#' + sec_list[i].id + '\'>' + sec_list[i].dataset.nav + '</a></li>';
+	// for (let i = 0; i < sec_list.length; i++) {
+	// console.log(sec_list[i].id)
+	// console.log(sec_list[i].dataset.nav);
+	//let li_txt = document.createTextNode(sec_list[i].dataset.nav);
+	//li_item.appendChild(li_txt);
+	//li_item.textContent = sec_list[i].dataset.nav;
+	// 	let new_li = '<li><a class=\'menu__link\' href=\'#' + sec_list[i].id + '\'>' + sec_list[i].dataset.nav + '</a></li>';
+	// 	navbar.insertAdjacentHTML('beforeend', new_li);
+
+	// }
+	sec_list.forEach(sec => {
+		const new_li = '<li><a class=\'menu__link\' href=\'#' + sec.id + '\'>' + sec.dataset.nav + '</a></li>';
 		navbar.insertAdjacentHTML('beforeend', new_li);
 
-	}
+	});
 }
 
 // Add class 'active' to section when near top of viewport
+// or to anchor item when clicked
 function setActive(elem, className) {
 	// console.log(elem);
-	// Get previously 'active' section
+	// Get previously 'active' section or anchor item
 	const prevAvtice = document.querySelector('.' + className + '');
 	if (prevAvtice) {
 		prevAvtice.classList.remove(className);
 	}
-	// Set 'active' class to new section
+	// Set 'active' class to new section or anchor item
 	elem.classList.add(className);
 }
 
@@ -140,8 +146,7 @@ document.body.onload = function () {
 	// Build menu 
 	buildNav();
 
-	// window.onscroll = function (event) {
-	window.addEventListener('scroll', function (event) {
+	window.addEventListener('scroll', function () {
 		// Set sections as active when window scrolls
 		sec_list.forEach((sec) => {
 			// console.log(sec);
@@ -159,12 +164,4 @@ document.body.onload = function () {
 
 	// Scroll to section on link click
 	scrollSection();
-
-
 };
-
-
-
-
-
-
